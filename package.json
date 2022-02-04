@@ -1,0 +1,20 @@
+{
+  "name": "a-different-todo",
+  "version": "0.1.0",
+  "description": "TODO app at the end of the day",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kennethfreitas/a-different-todo.git"
+  },
+  "keywords": [],
+  "author": "Kenneth Motta Freitas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kennethfreitas/a-different-todo/issues"
+  },
+  "homepage": "https://github.com/kennethfreitas/a-different-todo#readme"
+}
