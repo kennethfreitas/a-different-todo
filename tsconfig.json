@@ -17,6 +17,13 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "paths": {
+			"@core/*": ["core/*"],
+			"@config/*": ["config/*"],
+			"@shared/*": ["shared/*"]
+		},
+  },
+  "include": ["src"],
+	"exclude": ["node_modules",]
 }
