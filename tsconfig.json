@@ -1,4 +1,8 @@
 {
+  "ts-node": {
+    "transpileOnly": true,
+    "require": [ "typescript-transform-paths/register" ],
+  },
   "compilerOptions": {
     "listFiles": true,
     "target": "es6",
@@ -16,14 +20,19 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "sourceMap": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
     "paths": {
 			"@core/*": ["core/*"],
 			"@config/*": ["config/*"],
-			"@shared/*": ["shared/*"]
+			"@shared/*": ["shared/*"],
+			"@spec/*": ["spec/*"]
 		},
+    "plugins": [
+      { "transform": "typescript-transform-paths" }
+    ]
   },
   "include": ["src"],
-	"exclude": ["node_modules",]
+	"exclude": ["node_modules"],
 }

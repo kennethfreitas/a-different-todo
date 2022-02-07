@@ -1,7 +1,9 @@
 import { CreateTaskDto } from './dtos/CreateTaskDto';
-import { TaskRepository } from './interfaces/TaskRepository';
+import { TaskRepository } from './persistence/TaskRepository';
 import { nanoid } from 'nanoid';
+import { Service } from 'typedi';
 
+@Service()
 export class TaskService {
   constructor(private readonly repository: TaskRepository) {}
 

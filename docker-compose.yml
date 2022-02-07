@@ -1,0 +1,32 @@
+---
+version: '3.7'
+
+networks:
+  lan_access:
+    driver: bridge
+
+services:
+  app:
+    build: .
+    container_name: server
+    restart: always
+    ports:
+      - 5000:5000
+    environment:
+      - PORT=5000
+      - DATABASE_URI=mongodb://mongo:27017/app
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    networks:
+      - lan_access
+      - default
+  mongo:
+    image: mongo:5
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb-data:/var/lib/mongodb/data

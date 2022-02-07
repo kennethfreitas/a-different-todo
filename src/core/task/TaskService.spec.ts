@@ -1,18 +1,14 @@
-import { describe, expect, test, jest, afterEach } from '@jest/globals';
-import { Task } from './interfaces/Task';
+import { TaskRepositoryMock } from '@spec/mocks';
 import { TaskService } from './TaskService';
 
 describe('Test Suite: Task Service', () => {
-  const repositoryMock = {
-    async save(_task: Task): Promise<void> {},
-  };
-  const taskService = new TaskService(repositoryMock);
+  const taskService = new TaskService(TaskRepositoryMock);
 
   afterEach(async () => jest.restoreAllMocks());
 
   describe('createTask', () => {
     test('It should create a new task and return a id', async () => {
-      const saveSpy = jest.spyOn(repositoryMock, 'save');
+      const saveSpy = jest.spyOn(TaskRepositoryMock, 'save');
       const newTask = {
         description: 'Todo something',
         responsible: 'Joe',
@@ -25,7 +21,7 @@ describe('Test Suite: Task Service', () => {
     });
 
     test('It should throw an error if is a todo without description', async () => {
-      const saveSpy = jest.spyOn(repositoryMock, 'save');
+      const saveSpy = jest.spyOn(TaskRepositoryMock, 'save');
       const newTask = {
         description: '',
         responsible: 'Joe',
@@ -38,7 +34,7 @@ describe('Test Suite: Task Service', () => {
     });
 
     test('It should throw an error if is a todo without responsible', async () => {
-      const saveSpy = jest.spyOn(repositoryMock, 'save');
+      const saveSpy = jest.spyOn(TaskRepositoryMock, 'save');
       const newTask = {
         description: 'Todo something',
         responsible: '',
