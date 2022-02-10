@@ -15,6 +15,10 @@ const taskSchema = new Schema<Task>(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
   },
   {
     toObject: {

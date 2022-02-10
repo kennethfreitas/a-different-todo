@@ -1,25 +1,23 @@
 import { CreateTaskDto } from './dtos/CreateTaskDto';
 import { TaskRepository } from './persistence/TaskRepository';
 import { nanoid } from 'nanoid';
-import { Service } from 'typedi';
+import { Inject, Service } from 'typedi';
+import { ValidateDto } from '@shared/helpers/ValidateDto';
+import { NotifyTask } from './interfaces/NotifyTask';
+import { EmailNotify } from './integrations/EmailNotify';
 
 @Service()
 export class TaskService {
-  constructor(private readonly repository: TaskRepository) {}
+  constructor(
+    private readonly repository: TaskRepository,
+    @Inject(() => EmailNotify) private readonly emailNotify: NotifyTask
+  ) {}
 
+  @ValidateDto(CreateTaskDto)
   async createTask(newTask: CreateTaskDto): Promise<string> {
-    if (!this.#isNewTaskValid(newTask)) throw new Error('A task must valid a description and a responsible.');
-
     const id = nanoid();
     await this.repository.save({ id, ...newTask });
+    await this.emailNotify.alert(newTask.email);
     return id;
-  }
-
-  #isNewTaskValid(newTask: CreateTaskDto): boolean {
-    const { description, responsible } = newTask;
-    const isValidDescription = !!description && description.length > 10;
-    const isValidResponsible = !!responsible;
-
-    return isValidDescription && isValidResponsible;
   }
 }
