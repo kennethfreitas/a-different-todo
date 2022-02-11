@@ -1,8 +1,9 @@
 import { NotifyTaskMock, TaskRepositoryMock } from '@spec/mocks';
+import Container from 'typedi';
 import { TaskService } from './TaskService';
 
 describe('Test Suite: Task Service', () => {
-  const taskService = new TaskService(TaskRepositoryMock, NotifyTaskMock);
+  const taskService = Container.get(TaskService);
   const tomorrowDate = new Date();
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
   const tomorrow = tomorrowDate.toISOString().slice(0, 10);
