@@ -128,4 +128,14 @@ describe('Test Suite: Task Service', () => {
       expect(alertSpy).toHaveBeenCalled();
     });
   });
+
+  describe('completeTask', () => {
+    test('It should complete a task', async () => {
+      const updateSpy = jest.spyOn(TaskRepositoryMock, 'update');
+
+      await expect(taskService.completeTask('id')).resolves.not.toThrow();
+
+      expect(updateSpy).toBeCalled();
+    });
+  });
 });

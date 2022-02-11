@@ -27,6 +27,10 @@ export class TaskService {
     return id;
   }
 
+  async completeTask(taskId: string): Promise<void> {
+    await this.repository.update(taskId, { isDone: true });
+  }
+
   async alertUpcomingTasks(): Promise<void> {
     await this.alertUpcomingTasksUseCase.exec();
   }

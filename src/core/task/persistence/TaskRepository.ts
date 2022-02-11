@@ -12,4 +12,8 @@ export class TaskRepository {
     const tasks = await TaskModel.find({ isDone: false, dueDate: { $gte: start, $lt: end } });
     return tasks.map(task => task.toObject());
   }
+
+  async update(id: string, changes: Partial<Task>): Promise<void> {
+    await TaskModel.findOneAndUpdate({ id }, changes, { runValidators: true });
+  }
 }
