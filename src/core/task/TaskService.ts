@@ -22,7 +22,7 @@ export class TaskService {
     if (!this.isDueDateValid(dueDate)) throw new Error('Due date cannot be in the past');
 
     const id = nanoid();
-    await this.repository.save({ ...newTask, id, dueDate });
+    await this.repository.save({ ...newTask, id, dueDate, isDone: false });
     await this.emailNotify.alert(newTask.email);
     return id;
   }

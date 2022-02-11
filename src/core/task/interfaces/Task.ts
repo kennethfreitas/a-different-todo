@@ -4,4 +4,5 @@ export interface Task {
   dueDate: Date;
   responsible: string;
   email: string;
+  isDone: boolean;
 }

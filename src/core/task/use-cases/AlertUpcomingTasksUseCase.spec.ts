@@ -14,7 +14,7 @@ describe('AlertUpcomingTasksUseCase Test Suite', () => {
 
   test('It should do nothing it does not exist a task in the range', async () => {
     const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
-    jest.spyOn(TaskRepositoryMock, 'getByDueDateRange').mockImplementation(async (_start, _end) => []);
+    jest.spyOn(TaskRepositoryMock, 'getIncompletedByDueDateRange').mockImplementation(async (_start, _end) => []);
     const result = alertUpcomingTasksUseCase.exec();
 
     await expect(result).resolves.not.toThrow();

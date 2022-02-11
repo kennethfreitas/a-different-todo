@@ -6,7 +6,7 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 
 export const TaskRepositoryMock: TaskRepository = {
   async save(_task: Task): Promise<void> {},
-  async getByDueDateRange(_start: Date, _end: Date): Promise<Task[]> {
+  async getIncompletedByDueDateRange(_start: Date, _end: Date): Promise<Task[]> {
     return [
       {
         id: 'owNKWvV32Lf2izCcDgNjo',
@@ -14,6 +14,7 @@ export const TaskRepositoryMock: TaskRepository = {
         dueDate: tomorrow,
         responsible: 'Mr Joe',
         email: 'joe@email.com',
+        isDone: false,
       },
       {
         id: 'wxmR02MLLH6rtw7Wjt45w',
@@ -21,6 +22,7 @@ export const TaskRepositoryMock: TaskRepository = {
         dueDate: tomorrow,
         responsible: 'Mr Joe',
         email: 'joe@email.com',
+        isDone: false,
       },
       {
         id: 'H0aRbKdbE-AsSdHrJKvFa',
@@ -28,6 +30,7 @@ export const TaskRepositoryMock: TaskRepository = {
         dueDate: tomorrow,
         responsible: 'Mr Joe',
         email: 'joe@email.com',
+        isDone: false,
       },
     ];
   },

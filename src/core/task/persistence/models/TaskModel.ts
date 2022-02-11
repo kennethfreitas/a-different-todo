@@ -23,6 +23,10 @@ const taskSchema = new Schema<Task>(
       type: String,
       required: true,
     },
+    isDone: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toObject: {

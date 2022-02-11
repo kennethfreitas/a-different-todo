@@ -13,7 +13,7 @@ export class AlertUpcomingTasksUseCase implements UseCase<void, void> {
 
   async exec(): Promise<void> {
     const [start, end] = this.getDateRange();
-    const overcomeTasks = await this.repository.getByDueDateRange(start, end);
+    const overcomeTasks = await this.repository.getIncompletedByDueDateRange(start, end);
 
     if (!overcomeTasks.length) return;
 
