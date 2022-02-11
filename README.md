@@ -4,3 +4,4 @@
 
 ### Day 3 - Conclusion
 
+Before starting, I know that the library "class-validator" has the decorator "@MaxDate" that verify if the date is in the future, but I didn't have any idea how to bring some logic to the app to demonstrate that the facade is clean, so we introduce private method into to better reuse and keep simple all in one file.
