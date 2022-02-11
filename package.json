@@ -9,7 +9,8 @@
     "dev": "nodemon",
     "start": "node -r typescript-transform-paths/register dist/index.js",
     "build": "rimraf ./dist && tsc --project tsconfig.json",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "job:task-reminder": "node -r typescript-transform-paths/register dist/runners/taskReminder.js"
   },
   "repository": {
     "type": "git",

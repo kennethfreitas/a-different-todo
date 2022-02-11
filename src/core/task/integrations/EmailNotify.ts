@@ -13,8 +13,8 @@ export class EmailNotify implements NotifyTask {
     await this.getTransporter().sendMail({
       from: EMAIL_ENV.ORIGIN_EMAIL,
       to: email,
-      subject: 'New task for you! :D',
-      text: 'You have been assigned to a new task!',
+      subject: 'You have a task assigned for you! :D',
+      text: 'You have been assigned to a task! Do not forget!',
     });
   }
 

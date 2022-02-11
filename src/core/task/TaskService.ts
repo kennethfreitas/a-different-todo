@@ -1,13 +1,16 @@
 import { CreateTaskDto } from './dtos/CreateTaskDto';
 import { TaskRepository } from './persistence/TaskRepository';
 import { nanoid } from 'nanoid';
-import { Inject, Service } from 'typedi';
+import Container, { Inject, Service } from 'typedi';
 import { ValidateDto } from '@shared/helpers/ValidateDto';
 import { NotifyTask } from './interfaces/NotifyTask';
 import { EmailNotify } from './integrations/EmailNotify';
+import { AlertUpcomingTasksUseCase } from './use-cases/AlertUpcomingTasksUseCase';
 
 @Service()
 export class TaskService {
+  private alertUpcomingTasksUseCase = Container.get(AlertUpcomingTasksUseCase);
+
   constructor(
     private readonly repository: TaskRepository,
     @Inject(() => EmailNotify) private readonly emailNotify: NotifyTask
@@ -22,6 +25,10 @@ export class TaskService {
     await this.repository.save({ ...newTask, id, dueDate });
     await this.emailNotify.alert(newTask.email);
     return id;
+  }
+
+  async alertUpcomingTasks(): Promise<void> {
+    await this.alertUpcomingTasksUseCase.exec();
   }
 
   private isDueDateValid(dueDate: Date): boolean {

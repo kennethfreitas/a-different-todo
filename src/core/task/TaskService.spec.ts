@@ -117,4 +117,15 @@ describe('Test Suite: Task Service', () => {
       expect(alertSpy).not.toBeCalled();
     });
   });
+
+  describe('alertUpcomingTasks', () => {
+    test('It should bring all tasks in a range of 3 days and send a reminder to the responsible', async () => {
+      const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
+      const result = taskService.alertUpcomingTasks();
+
+      await expect(result).resolves.not.toThrow();
+
+      expect(alertSpy).toHaveBeenCalled();
+    });
+  });
 });
