@@ -15,9 +15,17 @@ export class TaskService {
 
   @ValidateDto(CreateTaskDto)
   async createTask(newTask: CreateTaskDto): Promise<string> {
+    const dueDate = new Date(newTask.dueDate);
+    if (!this.isDueDateValid(dueDate)) throw new Error('Due date cannot be in the past');
+
     const id = nanoid();
-    await this.repository.save({ id, ...newTask });
+    await this.repository.save({ ...newTask, id, dueDate });
     await this.emailNotify.alert(newTask.email);
     return id;
+  }
+
+  private isDueDateValid(dueDate: Date): boolean {
+    const today = new Date();
+    return dueDate > today;
   }
 }

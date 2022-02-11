@@ -3,6 +3,9 @@ import { TaskService } from './TaskService';
 
 describe('Test Suite: Task Service', () => {
   const taskService = new TaskService(TaskRepositoryMock, NotifyTaskMock);
+  const tomorrowDate = new Date();
+  tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+  const tomorrow = tomorrowDate.toISOString().slice(0, 10);
 
   afterEach(async () => jest.restoreAllMocks());
 
@@ -12,6 +15,7 @@ describe('Test Suite: Task Service', () => {
       const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
       const newTask = {
         description: 'Todo something',
+        dueDate: tomorrow,
         responsible: 'Joe',
         email: 'joe@email.com',
       };
@@ -28,6 +32,7 @@ describe('Test Suite: Task Service', () => {
       const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
       const newTask = {
         description: '',
+        dueDate: tomorrow,
         responsible: 'Joe',
         email: 'joe@email.com',
       };
@@ -44,6 +49,7 @@ describe('Test Suite: Task Service', () => {
       const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
       const newTask = {
         description: 'Todo something',
+        dueDate: tomorrow,
         responsible: '',
         email: 'joe@email.com',
       };
@@ -60,8 +66,48 @@ describe('Test Suite: Task Service', () => {
       const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
       const newTask = {
         description: 'Todo something',
+        dueDate: tomorrow,
         responsible: 'Joe',
         email: '',
+      };
+
+      const result = taskService.createTask(newTask);
+
+      await expect(result).rejects.toThrow();
+      expect(saveSpy).not.toBeCalled();
+      expect(alertSpy).not.toBeCalled();
+    });
+
+    test('It should throw an error if is a todo without due date', async () => {
+      const saveSpy = jest.spyOn(TaskRepositoryMock, 'save');
+      const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
+      const newTask = {
+        description: 'Todo something',
+        dueDate: '',
+        responsible: 'Joe',
+        email: 'joe@email.com',
+      };
+
+      const result = taskService.createTask(newTask);
+
+      await expect(result).rejects.toThrow();
+      expect(saveSpy).not.toBeCalled();
+      expect(alertSpy).not.toBeCalled();
+    });
+
+    test('It should throw an error if is a todo has a due date on the past', async () => {
+      const saveSpy = jest.spyOn(TaskRepositoryMock, 'save');
+      const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
+
+      const yesterdayDate = new Date();
+      yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+      const yesterday = yesterdayDate.toISOString().slice(0, 10);
+
+      const newTask = {
+        description: 'Todo something',
+        dueDate: yesterday,
+        responsible: 'Joe',
+        email: 'joe@email.com',
       };
 
       const result = taskService.createTask(newTask);

@@ -11,6 +11,10 @@ const taskSchema = new Schema<Task>(
       type: String,
       required: true,
     },
+    dueDate: {
+      type: Date,
+      required: true,
+    },
     responsible: {
       type: String,
       required: true,

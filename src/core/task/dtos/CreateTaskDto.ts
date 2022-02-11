@@ -1,8 +1,7 @@
 import { BaseDto } from '@shared/helpers/BaseDto';
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
-import { Task } from '../interfaces/Task';
+import { IsDateString, IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
-export class CreateTaskDto extends BaseDto implements Omit<Task, 'id'> {
+export class CreateTaskDto extends BaseDto {
   @IsString()
   @MinLength(10, {
     message: 'The description is too short',
@@ -19,6 +18,11 @@ export class CreateTaskDto extends BaseDto implements Omit<Task, 'id'> {
     message: 'You must assign an email for a responsible for a task',
   })
   email!: string;
+
+  @IsDateString({
+    message: 'A task must have a deadline',
+  })
+  dueDate!: string;
 
   constructor() {
     super();
