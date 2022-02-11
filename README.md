@@ -1,9 +1,9 @@
-## Day 4
+## Day 5
 
-- Manager: Aw, everyone is losing the date, let's alert them 3, 2, and 1 day before the final deadline!
+- Manager: Ahhh they don't do the tasks, I want to see everyone that loses a deadline!
 
-### Day 4 - Conclusion
+- Developer: Are you sure?
 
-A new "port" was introduced to be called via script in a cron-job or something similar to check tasks that the deadline is near. The separation of concern was to create a use-case to do this super-specific job (but of course, it was better to put directly on the Facade to maintain simplicity, but it is an example).
+- Manager: Yeaaaaah
 
-Different from dependencies that the Facade has, the use-case actually is an extension of the behavior from the Facade, because of that it has or implementation as a property, keeping our Facade as the entrance of the core and reutilizing all fact that already exists.
+### Day 5 - Conclusion
