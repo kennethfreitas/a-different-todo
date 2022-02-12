@@ -1,8 +1,9 @@
 import { NotifyTaskMock, TaskRepositoryMock } from '@spec/mocks';
+import Container from 'typedi';
 import { AlertUpcomingTasksUseCase } from './AlertUpcomingTasksUseCase';
 
 describe('AlertUpcomingTasksUseCase Test Suite', () => {
-  const alertUpcomingTasksUseCase = new AlertUpcomingTasksUseCase(TaskRepositoryMock, NotifyTaskMock);
+  const alertUpcomingTasksUseCase = Container.get(AlertUpcomingTasksUseCase);
   test('It should bring all tasks in a range of 3 days and send a reminder to the responsible', async () => {
     const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
     const result = alertUpcomingTasksUseCase.exec();

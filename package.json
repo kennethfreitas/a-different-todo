@@ -10,7 +10,8 @@
     "start": "node -r typescript-transform-paths/register dist/index.js",
     "build": "rimraf ./dist && tsc --project tsconfig.json",
     "prepare": "husky install",
-    "job:task-reminder": "node -r typescript-transform-paths/register dist/runners/taskReminder.js"
+    "job:task-reminder": "node -r typescript-transform-paths/register dist/runners/taskReminder.js",
+    "jobeta": "ts-node src/runners/taskReminder.ts"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "class-validator": "^0.13.2",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "kafkajs": "^1.16.0",
     "mongoose": "^6.2.0",
     "nanoid": "^3.2.0",
     "nodemailer": "^6.7.2",
