@@ -8,6 +8,7 @@ describe('E2E web app test suite', () => {
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
   const tomorrow = tomorrowDate.toISOString().slice(0, 10);
 
+  afterEach(async () => jest.restoreAllMocks());
   describe('Test suite to tasks path', () => {
     test('It should create a new task', async () => {
       const response = await request(app)
