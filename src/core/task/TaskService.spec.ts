@@ -1,4 +1,4 @@
-import { NotifyTaskMock, TaskRepositoryMock } from '@spec/mocks';
+import { AlertExpirationMock, NotifyTaskMock, TaskRepositoryMock } from '@spec/mocks';
 import Container from 'typedi';
 import { TaskService } from './TaskService';
 
@@ -123,6 +123,17 @@ describe('Test Suite: Task Service', () => {
     test('It should bring all tasks in a range of 3 days and send a reminder to the responsible', async () => {
       const alertSpy = jest.spyOn(NotifyTaskMock, 'alert');
       const result = taskService.alertUpcomingTasks();
+
+      await expect(result).resolves.not.toThrow();
+
+      expect(alertSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('checkOverdueTasks', () => {
+    test('It should bring all expired tasks and alert about them', async () => {
+      const alertSpy = jest.spyOn(AlertExpirationMock, 'alert');
+      const result = taskService.checkOverdueTasks();
 
       await expect(result).resolves.not.toThrow();
 

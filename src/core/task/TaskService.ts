@@ -6,10 +6,12 @@ import { ValidateDto } from '@shared/helpers/ValidateDto';
 import { NotifyTask } from './interfaces/NotifyTask';
 import { EmailNotify } from './integrations/EmailNotify';
 import { AlertUpcomingTasksUseCase } from './use-cases/AlertUpcomingTasksUseCase';
+import { CheckOverdueTasksUseCase } from './use-cases/CheckOverdueTasksUseCase';
 
 @Service()
 export class TaskService {
   private alertUpcomingTasksUseCase = Container.get(AlertUpcomingTasksUseCase);
+  private checkOverdueTasksUseCase = Container.get(CheckOverdueTasksUseCase);
 
   constructor(
     private readonly repository: TaskRepository,
@@ -33,6 +35,10 @@ export class TaskService {
 
   async alertUpcomingTasks(): Promise<void> {
     await this.alertUpcomingTasksUseCase.exec();
+  }
+
+  async checkOverdueTasks(): Promise<void> {
+    await this.checkOverdueTasksUseCase.exec();
   }
 
   private isDueDateValid(dueDate: Date): boolean {

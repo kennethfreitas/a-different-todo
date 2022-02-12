@@ -4,6 +4,8 @@ import { CheckOverdueTasksUseCase } from './CheckOverdueTasksUseCase';
 
 describe('CheckOverdueTasksUseCase Test Suite', () => {
   const checkOverdueTasksUseCase = Container.get(CheckOverdueTasksUseCase);
+
+  afterEach(async () => jest.restoreAllMocks());
   test('It should bring all expired tasks and alert about them', async () => {
     const alertSpy = jest.spyOn(AlertExpirationMock, 'alert');
     const result = checkOverdueTasksUseCase.exec();

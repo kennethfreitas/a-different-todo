@@ -15,6 +15,6 @@ export default {
   },
   testMatch: ['<rootDir>/src/**/*.spec.ts'],
   collectCoverageFrom: ['<rootDir>/src/**'],
-  coveragePathIgnorePatterns: ['index.ts', 'interfaces', 'persistence', 'config'],
+  coveragePathIgnorePatterns: ['index.ts', 'interfaces', 'persistence', 'constants', 'config'],
   setupFiles: ['<rootDir>/src/spec/setup.ts'],
 };
