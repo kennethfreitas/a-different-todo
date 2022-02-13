@@ -12,7 +12,7 @@
     "prepare": "husky install",
     "job:task-reminder": "node -r typescript-transform-paths/register dist/runners/taskReminder.js",
     "job:check-tasks": "node -r typescript-transform-paths/register dist/runners/checkTasks.js",
-    "consumer:penalt-users": "ts-node src/consumers/index.ts penalt-users"
+    "consumer:penalt-users": "node -r typescript-transform-paths/register dist/consumers/index.js penalt-users"
   },
   "repository": {
     "type": "git",

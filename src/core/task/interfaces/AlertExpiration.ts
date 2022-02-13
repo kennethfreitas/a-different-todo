@@ -1,3 +1,9 @@
+interface ExpiredTask {
+  taskId: string;
+  responsible: string;
+  email: string;
+}
+
 export interface AlertExpiration {
-  alert(taskId: string, responsible: string, email: string): Promise<void>;
+  alert(expiredTask: ExpiredTask): Promise<void>;
 }

@@ -29,7 +29,7 @@ app.post('/tasks/:id/done', async (req: Request, res: Response, next: NextFuncti
 
 type HttpError = Error & { statusCode: number };
 app.use((error: HttpError, _req: Request, res: Response, _next: NextFunction) => {
-  res.status(error?.statusCode || 500).json({ message: error.message });
+  res.status(error.statusCode || 500).json({ message: error.message });
 });
 
 export default app;

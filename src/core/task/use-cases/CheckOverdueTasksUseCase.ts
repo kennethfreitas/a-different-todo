@@ -20,7 +20,7 @@ export class CheckOverdueTasksUseCase implements UseCase<void, void> {
     if (!overdueTasks.length) return;
 
     await Promise.all(
-      overdueTasks.map(({ id, responsible, email }) => this.expiredTaskAlert.alert(id, responsible, email))
+      overdueTasks.map(({ id, responsible, email }) => this.expiredTaskAlert.alert({ taskId: id, responsible, email }))
     );
   }
 }
