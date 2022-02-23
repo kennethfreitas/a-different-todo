@@ -34,12 +34,7 @@ export default async function startConsumer(consumerName: string): Promise<void>
         console.info(`${new Date()} - New event to ${TOPICS_NAME.EXPIRED_TASK}`);
 
         const payload = event.message.value?.toString();
-        if (!payload) {
-          await getConsumer[consumerName](null);
-          return;
-        }
-
-        const data = JSON.parse(payload);
+        const data = payload ? JSON.parse(payload) : null;
         await getConsumer[consumerName](data);
       },
     });

@@ -10,8 +10,8 @@
     "start": "node -r typescript-transform-paths/register dist/index.js",
     "build": "rimraf ./dist && tsc --project tsconfig.json",
     "prepare": "husky install",
-    "job:task-reminder": "node -r typescript-transform-paths/register dist/runners/taskReminder.js",
-    "job:check-tasks": "node -r typescript-transform-paths/register dist/runners/checkTasks.js",
+    "job:task-reminder": "node -r typescript-transform-paths/register dist/runners/index.js task-reminder",
+    "job:check-tasks": "node -r typescript-transform-paths/register dist/runners/index.js check-tasks",
     "consumer:penalt-users": "node -r typescript-transform-paths/register dist/consumers/index.js penalt-users"
   },
   "repository": {
