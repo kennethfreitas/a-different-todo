@@ -7,7 +7,7 @@ import taskReminder from './taskReminder';
 
 const runnerName = process.argv[2];
 
-const getRunner: Record<string, (data: any) => Promise<void>> = {
+const getRunner: Record<string, () => Promise<void>> = {
   'check-tasks': checkTasks,
   'task-reminder': taskReminder,
 };
@@ -22,7 +22,7 @@ export default async function startConsumer(runnerName: string): Promise<void> {
     console.info('Starting runner...');
     await connectDatabase();
 
-    await service.checkOverdueTasks();
+    await getRunner[runnerName]();
 
     console.info('Closing database connection');
     mongoose.disconnect();
