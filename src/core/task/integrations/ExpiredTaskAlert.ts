@@ -21,9 +21,7 @@ export class ExpiredTaskAlert implements AlertExpiration {
       topic: `${BROKER_ENVS.TOPIC_PREFIX}${TOPICS_NAME.EXPIRED_TASK}`,
       messages: [
         {
-          value: JSON.stringify({
-            ...expiredTask,
-          }),
+          value: JSON.stringify(expiredTask),
         },
       ],
     });
