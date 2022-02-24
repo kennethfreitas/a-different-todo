@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import 'dotenv/config';
 
 import { connectDatabase } from '@config/connectToDatabase';
+import mongoose from 'mongoose';
 import checkTasks from './checkTasks';
 import taskReminder from './taskReminder';
 
