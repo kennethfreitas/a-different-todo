@@ -7,6 +7,8 @@ import { getDateRange } from '../utils';
 
 @Service()
 export class AlertUpcomingTasksUseCase implements UseCase<void, void> {
+  private DAYS_TO_EXPIRE = 3;
+
   constructor(
     private readonly repository: TaskRepository,
     @Inject(() => EmailNotify) private readonly emailNotify: NotifyTask
@@ -14,7 +16,7 @@ export class AlertUpcomingTasksUseCase implements UseCase<void, void> {
 
   async exec(): Promise<void> {
     const today = new Date();
-    const [start, end] = getDateRange(today, 3);
+    const [start, end] = getDateRange(today, this.DAYS_TO_EXPIRE);
     const overdueTasks = await this.repository.getIncompletedByDueDateRange(start, end);
 
     if (!overdueTasks.length) return;
