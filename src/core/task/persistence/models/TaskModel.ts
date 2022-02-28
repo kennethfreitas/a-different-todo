@@ -20,9 +20,8 @@ const taskSchema = new Schema<Task>(
     toObject: {
       virtuals: true,
       transform: function (doc, ret) {
-        delete ret._id;
-        delete ret.__v;
-        return ret;
+        const {_id, __v, ...obj} = ret
+        return obj;
       },
     },
   }
